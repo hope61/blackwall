@@ -1,0 +1,45 @@
+services:
+  blackwall:
+    build: .
+    image: blackwall:latest
+    container_name: blackwall
+    restart: unless-stopped
+    init: true                      # reap zombies, forward SIGTERM cleanly
+
+    ports:
+      # Bound to the host loopback: the container must listen on 0.0.0.0 to be
+      # reachable at all, so the isolation is done here instead.
+      - "127.0.0.1:${PORT:-8787}:8787"
+
+    # Optional API keys. Missing file is fatal to compose, so .env is created
+    # by the repo already; every key inside it may be blank.
+    env_file:
+      - .env
+
+    environment:
+      # Always bind the container's internal port regardless of host mapping.
+      PORT: 8787
+      HOST: 0.0.0.0
+      TZ: ${TZ:-UTC}
+
+    volumes:
+      # Survives restarts, so a cold start does not re-pull all 22 upstreams.
+      - blackwall-cache:/app/.cache
+      # Edit the layout on the host and reload the browser — no rebuild.
+      - ./panels.config.json:/app/panels.config.json:ro
+
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8787/api/health"]
+      interval: 30s
+      timeout: 5s
+      start_period: 45s
+      retries: 3
+
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+volumes:
+  blackwall-cache:

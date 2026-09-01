@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BLACKWALL</title>
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000'/><rect x='3' y='3' width='4' height='4' fill='%23fff'/><rect x='9' y='9' width='4' height='4' fill='%23fff'/></svg>">
+</head>
+<body>
+<div id="edge">BLACKWALL // GLOBAL OPERATIONS</div>
+
+<div id="app">
+  <header id="head">
+    <div class="brand"><b>BLACKWALL</b><s>GLOBAL OPS</s></div>
+
+    <div id="modes" role="tablist" aria-label="View">
+      <button class="mode on" data-mode="read" role="tab" aria-selected="true">Brief</button>
+      <button class="mode" data-mode="ops" role="tab" aria-selected="false">Console</button>
+    </div>
+
+    <div class="head-right">
+      <button id="cmd-btn" class="hbtn" title="Command palette (⌘K)">⌘K</button>
+      <button id="refresh-all" class="hbtn" title="Refresh every panel (R)">Refresh</button>
+      <label id="filter-wrap" title="Filter panels  (/)">
+        <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M15.5 15.5L21 21"/></svg>
+        <input id="filter" type="text" placeholder="Filter" aria-label="Filter panels" autocomplete="off" spellcheck="false">
+        <button id="filter-clear" title="Clear">×</button>
+      </label>
+      <div id="infocon" data-level="unknown" title="SANS ISC INFOCON">
+        <span class="dot"></span><span id="infocon-t">——</span>
+      </div>
+      <div class="head-item"><b id="geo">———</b></div>
+      <div class="head-item"><b id="zulu">--:--:--Z</b></div>
+    </div>
+  </header>
+
+  <div id="shell">
+    <!-- labelled navigation, console only -->
+    <nav id="side" hidden>
+      <div class="side-title">Sections</div>
+      <div id="nav"></div>
+      <div class="side-foot">
+        <div class="k"><span>Palette</span><b>⌘K</b></div>
+        <div class="k"><span>Filter</span><b>/</b></div>
+        <div class="k"><span>Refresh all</span><b>R</b></div>
+        <div class="k"><span>Map layers</span><b>1–5</b></div>
+        <div class="k"><span>Switch view</span><b>C</b></div>
+      </div>
+    </nav>
+
+    <main id="body">
+      <div id="view-label"></div>
+
+      <!-- ── brief ── -->
+      <section id="brief">
+        <!-- hero: black card on a dithered field, per the reference -->
+        <div class="hero-wrap">
+          <div class="hero-dither"></div>
+          <div class="hero-card">
+            <h1 id="greeting" class="pix">Good morning</h1>
+
+            <div class="hero-stats">
+              <span>New since last visit: <b id="hero-new">—</b></span>
+              <span>Sources live: <b id="hero-src">—</b></span>
+            </div>
+            <div class="meter big" id="hero-meter"></div>
+
+            <div class="hero-foot">
+              <div>
+                <div id="datel">——</div>
+                <div id="hero-msg">——</div>
+              </div>
+              <button id="hero-cta" class="pill">Open console</button>
+            </div>
+          </div>
+        </div>
+        <div class="brief-cols">
+          <div class="stories">
+            <div id="digest"></div>
+            <button id="digest-more" hidden>Show more</button>
+          </div>
+
+          <div class="secondary">
+            <div class="side-block"><h2>Detected by sensors</h2><div id="also"></div></div>
+          </div>
+
+          <aside>
+            <div class="side-block"><h2>Status</h2><div id="headline"></div></div>
+            <div class="side-block"><h2>Needs attention</h2><div id="alerts" aria-live="polite"></div></div>
+            <div class="side-block" id="trend-block" hidden><h2>Trends</h2><div id="trends"></div></div>
+            <div class="side-block" id="hn-block" hidden><h2>Top on Hacker News</h2><div id="hn"></div></div>
+            <div class="side-block" id="root-block" hidden><h2>Root nameservers</h2><div id="rootlights"></div></div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ── map ── -->
+      <section id="hero">
+        <canvas id="map"></canvas>
+        <div class="map-ui tl">
+          <div class="seg" id="map-layers" role="group" aria-label="Map layer">
+            <button class="on" data-layer="threat" aria-pressed="true">Threat<i>1</i></button>
+            <button data-layer="cables" aria-pressed="false">Cables<i>2</i></button>
+            <button data-layer="tor" aria-pressed="false">Tor<i>3</i></button>
+            <button data-layer="outage" aria-pressed="false">Outage<i>4</i></button>
+            <button data-layer="orbit" aria-pressed="false">Orbit<i>5</i></button>
+          </div>
+        </div>
+        <div class="map-ui tr"><div class="map-legend" id="map-legend"></div></div>
+        <div class="map-ui bl">
+          <div class="map-zoom">
+            <button id="zin" title="Zoom in">+</button>
+            <button id="zout" title="Zoom out">−</button>
+            <button id="zreset" title="Reset">⌂</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── console ── -->
+      <div id="console"><div id="sections"></div></div>
+      <div id="no-results" class="msg" hidden>No panels match that filter</div>
+    </main>
+  </div>
+</div>
+
+<div id="palette" hidden role="dialog" aria-modal="true" aria-label="Command palette">
+  <div class="pal-box">
+    <input id="pal-input" type="text" role="combobox" aria-expanded="true" aria-controls="pal-list" aria-autocomplete="list" placeholder="Jump to a panel, switch a map layer, refresh…" autocomplete="off" spellcheck="false">
+    <div id="pal-list" role="listbox" aria-label="Commands"></div>
+    <div class="pal-foot"><span>↑↓ NAVIGATE</span><span>⏎ SELECT</span><span>ESC CLOSE</span></div>
+  </div>
+</div>
+
+<div id="focus" hidden role="dialog" aria-modal="true"><div id="focus-host"></div></div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>

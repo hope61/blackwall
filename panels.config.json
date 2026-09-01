@@ -1,0 +1,42 @@
+{
+  "_comment": "Layout control. Reorder, resize (span 1-4), disable, or retime any panel here. The server discovers sources automatically; this file decides how they are shown. Changes take effect on browser reload.",
+  "sections": [
+    { "id": "sec-threat", "num": "01", "name": "THREAT", "panels": [
+      { "id": "outages",    "span": 2, "on": true },
+      { "id": "bgp",        "span": 2, "on": true },
+      { "id": "ransomware", "span": 2, "on": true },
+      { "id": "kev",        "span": 2, "on": true },
+      { "id": "attacks",    "span": 2, "on": true },
+      { "id": "malware",    "span": 1, "on": true },
+      { "id": "apt",        "span": 1, "on": true }
+    ]},
+    { "id": "sec-net", "num": "02", "name": "NETWORK", "panels": [
+      { "id": "rootdns",    "span": 2, "on": true },
+      { "id": "cloudflare", "span": 2, "on": true },
+      { "id": "honeypot",   "span": 2, "on": true },
+      { "id": "tor",        "span": 1, "on": true },
+      { "id": "ct",         "span": 1, "on": true },
+      { "id": "cables",     "span": 1, "on": true },
+      { "id": "ipv6",       "span": 1, "on": true },
+      { "id": "egress",     "span": 2, "on": true }
+    ]},
+    { "id": "sec-intel", "num": "03", "name": "INTELLIGENCE", "panels": [
+      { "id": "world",      "span": 2, "on": true },
+      { "id": "news",       "span": 2, "on": true },
+      { "id": "breaches",   "span": 2, "on": true },
+      { "id": "cve",        "span": 2, "on": true },
+      { "id": "github",     "span": 2, "on": true }
+    ]},
+    { "id": "sec-amb", "num": "04", "name": "AMBIENT", "panels": [
+      { "id": "space",      "span": 1, "on": true },
+      { "id": "orbital",    "span": 1, "on": true },
+      { "id": "quakes",     "span": 2, "on": true }
+    ]}
+  ],
+  "views": {
+    "all":    ["sec-threat", "sec-net", "sec-intel", "sec-amb"],
+    "threat": ["sec-threat"],
+    "net":    ["sec-net"],
+    "intel":  ["sec-intel", "sec-amb"]
+  }
+}

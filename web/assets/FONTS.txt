@@ -1,0 +1,20 @@
+Fonts bundled with BLACKWALL
+============================
+
+Both families are licensed under the SIL Open Font License, Version 1.1, which
+permits redistribution provided this license text travels with the font files.
+
+  JetBrainsMono-{Regular,Medium,Bold,ExtraBold}.woff2
+    JetBrains Mono — Copyright 2020 The JetBrains Mono Project Authors
+    https://github.com/JetBrains/JetBrainsMono
+    Licence: OFL-JetBrainsMono.txt
+
+  Silkscreen-{Regular,Bold}.woff2
+    Silkscreen — Copyright 2001 The Silkscreen Project Authors
+    https://github.com/googlefonts/silkscreen
+    Licence: OFL-Silkscreen.txt
+
+Neither font is modified; the .woff2 files are format conversions only.
+The OFL forbids selling the fonts on their own and requires that any derivative
+not use the original Reserved Font Names. Neither applies to normal use of this
+project.

@@ -1,0 +1,17 @@
+.env
+node_modules/
+.cache/
+*.log
+.DS_Store
+
+# Imagery is not published by default: design references are third-party work,
+# and the raw retina screenshots are ~1MB each. Only the downscaled README
+# assets in docs/ ship.
+*.jpg
+*.jpeg
+*.png
+!docs/*.png
+
+# Working notes. Only the README is published.
+*.md
+!README.md

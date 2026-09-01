@@ -1,0 +1,14 @@
+{
+  "name": "blackwall",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "OSINT / internet situational-awareness console",
+  "scripts": {
+    "start": "node server/index.js",
+    "test": "node --test test/",
+    "test:unit": "node --test test/brief.test.js",
+    "dev": "node --watch server/index.js"
+  },
+  "engines": { "node": ">=20" }
+}
